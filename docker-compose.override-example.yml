@@ -1,0 +1,9 @@
+# Example docker-compose.override.yml
+# Demonstrates adding a local volume to the dynamodb container for persistence
+# See https://docs.docker.com/compose/extends/#multiple-compose-files
+# For more information about how to effectively use this file
+version: '3'
+services:
+  dynamodb:
+    volumes:
+      - ./.data/dynamodb:/dynamodb_local_db

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  dynamodb:
+    image: 'cnadiminti/dynamodb-local'
+    ports:
+      - '4567:4567'
+    networks:
+      - dynamodb-local-playground
+    environment:
+      DYNAMODB_PORT: '4567'
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin
+    ports:
+      - '8001:8001'
+    networks:
+      - dynamodb-local-playground
+    depends_on:
+      - dynamodb
+    environment:
+      DYNAMO_ENDPOINT: http://dynamodb:4567
+      AWS_REGION: 'us-east-1'
+      AWS_ACCESS_KEY_ID: 'local'
+      AWS_SECRET_ACCESS_KEY: 'local'
+
+networks:
+  dynamodb-local-playground:
